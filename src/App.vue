@@ -4,4 +4,6 @@
 
 <script setup></script>
 
-<style></style>
+<style>
+@import url(./assets/style/reset.min.css);
+</style>

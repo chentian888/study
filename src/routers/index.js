@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/home.vue'
-import Game from '../views/game.vue'
-import Sf from '../views/sf.vue'
+import Home from '../views/Home.vue'
+import Game from '../views/Game.vue'
+import Sf from '../views/Sf.vue'
 
 const routes = [
   { path: '/', component: Home },
