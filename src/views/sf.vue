@@ -318,7 +318,8 @@ onMounted(() => {
   tlLegRight.pause()
 
   // 星球
-  tlMoon.set('#moon', { transformOrigin: '50% 50%', rotation: 0 }).to('#moon', animationTime * 300, { rotation: 360 * 50 })
+  tlMoon
+  tlMoon.set('#moon', { transformOrigin: '50% 50%', rotation: 0 }).to('#moon', animationTime * 300, { rotation: 360 * 150 })
   // .to("#moon", animationTime / 4, { rotation: 180 })
   // .to("#moon", animationTime / 4, { rotation: 270 })
   // .to("#moon", animationTime / 4, { rotation: 360 })
@@ -350,9 +351,39 @@ onMounted(() => {
 
   tlPet.pause()
 })
-let i = 1
+let i = 0.6
+let count = 0
+let isEnd = false
+let isStart = false
+let now = Date.now()
+
+function countDown() {
+  isStart = true
+  let total = 10
+  return new Promise((resolve) => {
+    let timer = setInterval(() => {
+      total -= 1
+      if (total <= 0) {
+        clearInterval(timer)
+        isEnd = true
+        resolve()
+      }
+    }, 1000)
+  })
+}
+
 function rotate() {
-  console.log('====')
+  !isStart && countDown()
+  if (isEnd) {
+    console.log('===', '已经结束')
+    tlSfer.pause()
+    tlLegLeft.pause()
+    tlLegRight.pause()
+    tlMoon.pause()
+    return
+  }
+  count += 1
+  console.log(`统计第${count}次点击`, `用时${Date.now() - now}ms`)
   if (!tlMoon.isActive()) {
     tlSfer.play()
     tlLegLeft.play()
@@ -360,12 +391,20 @@ function rotate() {
     tlMoon.play()
   }
   tlMoon.timeScale(i)
+  tlSfer.timeScale(i / 10)
+  tlLegLeft.timeScale(i / 10)
+  tlLegRight.timeScale(i / 10)
+  tlMoon.timeScale(i / 10)
   i += 0.2
+  now = Date.now()
 }
 </script>
 
 <style scope>
 @import url('../assets/style/style.css');
+* {
+  box-sizing: border-box;
+}
 svg {
   width: 100%;
   height: 100%;

@@ -145,10 +145,10 @@
   margin-left: -2rem;
   margin-top: -0.65rem;
   position: fixed;
-  -webkit-transition: -webkit-transform 1s linear;
+  /* -webkit-transition: -webkit-transform 1s linear;
   transition: -webkit-transform 1s linear;
   transition: transform 1s linear;
-  transition: transform 1s linear, -webkit-transform 1s linear;
+  transition: transform 1s linear, -webkit-transform 1s linear; */
 }
 .MidAutumnGame_ISvAk3Jf .game-container .speed-btn {
   width: 1.8rem;
