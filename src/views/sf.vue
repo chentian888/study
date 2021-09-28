@@ -1,4 +1,6 @@
 <template>
+  <!-- <input type="number" step="100" v-model="counter" />
+  <h2>当前计数: {{ showNumber.toFixed(0) }}</h2> -->
   <div class="MidAutumnGame_ISvAk3Jf">
     <div class="game-on">
       <img class="moon-lay" src="../assets/image/i_moon-small.05518c1.png" />
@@ -44,7 +46,7 @@
         <div class="inset">00.00</div>
       </div>
       <div class="score">
-        <img src="../assets/image/start.png" /><span id="startCount">{{ counter }}</span>
+        <img src="../assets/image/start.png" /><span id="startCount">{{ showNumber }}</span>
       </div>
       <div class="game-container">
         <div class="stars pointer-none">
@@ -255,7 +257,7 @@
             </svg>
           </div>
         </div>
-        <div class="speed-btn showBg" @click="click2">
+        <div class="speed-btn showBg" @click="rotate">
           <div class="speed-btn_mask"></div>
         </div>
       </div>
@@ -265,6 +267,7 @@
 
 <script setup>
 import { onMounted, ref, watch } from 'vue'
+import gsap from 'gsap'
 const tlArmLeft = gsap.timeline()
 const animationTime = 0.4
 const tlSfer = gsap.timeline({ repeat: -1 })
@@ -355,11 +358,12 @@ onMounted(() => {
 })
 
 let i = 0.6
-let count = ref(0)
-let isEnd = false
-let isStart = false
+let count = ref(0) // 点击次数
+let isEnd = false // 倒计时是否结束
+let isStart = false // 是否已经开始
 let now = Date.now()
 
+// 倒计时
 function countDown() {
   isStart = true
   let total = 10
@@ -375,6 +379,7 @@ function countDown() {
   })
 }
 
+// 点击加速
 function rotate() {
   !isStart && countDown()
   if (isEnd) {
@@ -398,7 +403,6 @@ function rotate() {
   tlLegLeft.timeScale(i / 10)
   tlLegRight.timeScale(i / 10)
   tlMoon.timeScale(i / 10)
-  
   i += 0.2
   now = Date.now()
 }
@@ -409,25 +413,34 @@ export default {
   data() {
     return {
       counter: 0,
+      showNumber: 0,
       start: 0,
       end: 10000,
       duration: 3,
       format: true
     }
   },
+  watch: {
+    // 用于数字动画-注释
+    // count(newValue) {
+    //   gsap.to(this, { duration: 1, showNumber: Math.floor(newValue) })
+    // }
+  },
   methods: {
-    click2() {
-      gsap.set(this, {
-        log: this.start
-      })
-      gsap.to(this, this.duration, {
-        ease: Power2.easeInOut,
-        log: this.end,
-        onUpdate: () => {
-          this.counter = Math.floor(this.log)
-        }
-      })
-    }
+    // 用于数字动画-注释
+    // click2() {
+    //   gsap.set(this, {
+    //     log: this.start
+    //   })
+    //   gsap.to(this, this.duration, {
+    //     ease: Power2.easeInOut,
+    //     log: this.end,
+    //     onUpdate: () => {
+    //       console.log(this)
+    //       this.counter = Math.floor(this.log)
+    //     }
+    //   })
+    // }
   }
 }
 </script>

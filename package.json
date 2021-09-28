@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "gsap": "^3.7.1",
     "vue": "^3.1.5",
     "vue-router": "^4.0.11"
   },
