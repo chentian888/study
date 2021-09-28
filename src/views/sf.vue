@@ -43,7 +43,9 @@
         </div>
         <div class="inset">00.00</div>
       </div>
-      <div class="score"><img src="../assets/image/start.png" /><span>0</span></div>
+      <div class="score">
+        <img src="../assets/image/start.png" /><span id="startCount">{{ counter }}</span>
+      </div>
       <div class="game-container">
         <div class="stars pointer-none">
           <div title="" role="button" aria-label="animation" tabindex="0" style="width: 100%; height: 100%">
@@ -253,7 +255,7 @@
             </svg>
           </div>
         </div>
-        <div class="speed-btn showBg" @click="rotate">
+        <div class="speed-btn showBg" @click="click2">
           <div class="speed-btn_mask"></div>
         </div>
       </div>
@@ -262,14 +264,14 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
-const tlArmLeft = new TimelineMax()
+import { onMounted, ref, watch } from 'vue'
+const tlArmLeft = gsap.timeline()
 const animationTime = 0.4
-const tlSfer = new TimelineMax({ repeat: -1 })
-const tlLegLeft = new TimelineMax({ repeat: -1 })
-const tlLegRight = new TimelineMax({ repeat: -1 })
-const tlMoon = new TimelineMax()
-const tlPet = new TimelineMax({ repeat: -1 })
+const tlSfer = gsap.timeline({ repeat: -1 })
+const tlLegLeft = gsap.timeline({ repeat: -1 })
+const tlLegRight = gsap.timeline({ repeat: -1 })
+const tlMoon = gsap.timeline()
+const tlPet = gsap.timeline({ repeat: -1 })
 onMounted(() => {
   // 位置初始化
   tlArmLeft
@@ -295,31 +297,31 @@ onMounted(() => {
 
   tlSfer
     .set('#sfer', { y: 0 })
-    .to('#sfer', animationTime / 2, { y: -20 })
-    .to('#sfer', animationTime / 2, { y: 0 })
+    .to('#sfer', { duration: animationTime / 2, y: -20 })
+    .to('#sfer', { duration: animationTime / 2, y: 0 })
   tlSfer.pause()
 
   // 左腿
   tlLegLeft
     .set('#leg_l', { transformOrigin: '60% 20%', rotation: 20 })
-    .to('#leg_l', animationTime / 4, { rotation: 0 })
-    .to('#leg_l', animationTime / 4, { rotation: -60 })
-    .to('#leg_l', animationTime / 2, { rotation: 20 })
+    .to('#leg_l', { duration: animationTime / 4, rotation: 0 })
+    .to('#leg_l', { duration: animationTime / 4, rotation: -60 })
+    .to('#leg_l', { duration: animationTime / 2, rotation: 20 })
 
   tlLegLeft.pause()
 
   // 右腿
   tlLegRight
     .set('#leg_r', { transformOrigin: '15% 15%', rotation: 0 })
-    .to('#leg_r', animationTime / 4, { rotation: 20 })
-    .to('#leg_r', animationTime / 4, { rotation: 100 })
-    .to('#leg_r', animationTime / 2, { rotation: 0 })
+    .to('#leg_r', { duration: animationTime / 4, rotation: 20 })
+    .to('#leg_r', { duration: animationTime / 4, rotation: 100 })
+    .to('#leg_r', { duration: animationTime / 2, rotation: 0 })
 
   tlLegRight.pause()
 
   // 星球
   tlMoon
-  tlMoon.set('#moon', { transformOrigin: '50% 50%', rotation: 0 }).to('#moon', animationTime * 300, { rotation: 360 * 150 })
+  tlMoon.set('#moon', { transformOrigin: '50% 50%', rotation: 0 }).to('#moon', { duration: animationTime * 300, rotation: 360 * 150 })
   // .to("#moon", animationTime / 4, { rotation: 180 })
   // .to("#moon", animationTime / 4, { rotation: 270 })
   // .to("#moon", animationTime / 4, { rotation: 360 })
@@ -351,8 +353,9 @@ onMounted(() => {
 
   tlPet.pause()
 })
+
 let i = 0.6
-let count = 0
+let count = ref(0)
 let isEnd = false
 let isStart = false
 let now = Date.now()
@@ -382,8 +385,8 @@ function rotate() {
     tlMoon.pause()
     return
   }
-  count += 1
-  console.log(`统计第${count}次点击`, `用时${Date.now() - now}ms`)
+  count.value += 1
+  console.log(`统计第${count.value}次点击`, `用时${Date.now() - now}ms`)
   if (!tlMoon.isActive()) {
     tlSfer.play()
     tlLegLeft.play()
@@ -395,8 +398,37 @@ function rotate() {
   tlLegLeft.timeScale(i / 10)
   tlLegRight.timeScale(i / 10)
   tlMoon.timeScale(i / 10)
+  
   i += 0.2
   now = Date.now()
+}
+</script>
+<script>
+export default {
+  setup() {},
+  data() {
+    return {
+      counter: 0,
+      start: 0,
+      end: 10000,
+      duration: 3,
+      format: true
+    }
+  },
+  methods: {
+    click2() {
+      gsap.set(this, {
+        log: this.start
+      })
+      gsap.to(this, this.duration, {
+        ease: Power2.easeInOut,
+        log: this.end,
+        onUpdate: () => {
+          this.counter = Math.floor(this.log)
+        }
+      })
+    }
+  }
 }
 </script>
 
