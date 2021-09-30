@@ -46,7 +46,7 @@
         <div class="inset">00.00</div>
       </div>
       <div class="score">
-        <img src="../assets/image/start.png" /><span id="startCount">{{ showNumber }}</span>
+        <img src="../assets/image/start.png" /><span id="startCount">{{ count }}</span>
       </div>
       <div class="game-container">
         <div class="stars pointer-none">
@@ -58,7 +58,16 @@
                 </clipPath>
                 <image xlink:href="../assets/image/start2.png"></image>
               </defs>
+              <path
+                stroke="#000"
+                id="path"
+                d="m3,251.5c0,0 110.047999,-367.148379 361.999996,-152.507788"
+                opacity="0.5"
+                stroke-width="1.5"
+                fill="transparent"
+              />
               <g clip-path="url(#__lottie_element_16)">
+                <path id="path" d="m3,87.5c0,0 38,-130 125,-54" opacity="0.5" stroke-width="1.5" stroke="#000" fill="#fff" />
                 <g class="png" id="star">
                   <image width="185px" height="179px" preserveAspectRatio="xMidYMid slice" xlink:href="../assets/image/start3.png"></image>
                 </g>
@@ -268,6 +277,9 @@
 <script setup>
 import { onMounted, ref, watch } from 'vue'
 import gsap from 'gsap'
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin'
+
+gsap.registerPlugin(MotionPathPlugin)
 const tlArmLeft = gsap.timeline()
 const animationTime = 0.4
 const tlSfer = gsap.timeline({ repeat: -1 })
@@ -275,6 +287,7 @@ const tlLegLeft = gsap.timeline({ repeat: -1 })
 const tlLegRight = gsap.timeline({ repeat: -1 })
 const tlMoon = gsap.timeline()
 const tlPet = gsap.timeline({ repeat: -1 })
+const tlStart = gsap.timeline({ repeat: -1 })
 onMounted(() => {
   // 位置初始化
   tlArmLeft
@@ -304,6 +317,23 @@ onMounted(() => {
     .to('#sfer', { duration: animationTime / 2, y: 0 })
   tlSfer.pause()
 
+  const path = [
+    // 1
+
+    { x: 100, y: 10 },
+    { x: 190, y: 100 }
+  ]
+  tlStart
+    // .to('#star', { duration: animationTime, x: 140, y: 50, scale: 0.5, ease: 'power4.out' })
+    .to('#star', {
+      duration: animationTime,
+      scale: 0.3,
+      motionPath: {
+        path: '#path',
+        align: '#path'
+      }
+    })
+  tlStart.pause()
   // 左腿
   tlLegLeft
     .set('#leg_l', { transformOrigin: '60% 20%', rotation: 20 })
@@ -358,6 +388,7 @@ onMounted(() => {
 })
 
 let i = 0.6
+let validTime = 200 // 有效点击时间，大于等于200ms计入点击一次，小于200不计入点击，用于控制作弊点击过快的情况
 let count = ref(0) // 点击次数
 let isEnd = false // 倒计时是否结束
 let isStart = false // 是否已经开始
@@ -384,27 +415,35 @@ function rotate() {
   !isStart && countDown()
   if (isEnd) {
     console.log('===', '已经结束')
+    tlStart.pause()
     tlSfer.pause()
     tlLegLeft.pause()
     tlLegRight.pause()
     tlMoon.pause()
     return
   }
-  count.value += 1
-  console.log(`统计第${count.value}次点击`, `用时${Date.now() - now}ms`)
+
+  const diffTime = Date.now() - now
+  if (diffTime >= validTime) {
+    count.value += 1
+    console.log(`统计第${count.value}次点击`, `用时${diffTime}ms`)
+    now = Date.now()
+  }
+
   if (!tlMoon.isActive()) {
+    tlStart.play()
     tlSfer.play()
     tlLegLeft.play()
     tlLegRight.play()
     tlMoon.play()
   }
+  tlStart.timeScale(i / 5)
   tlMoon.timeScale(i)
   tlSfer.timeScale(i / 10)
   tlLegLeft.timeScale(i / 10)
   tlLegRight.timeScale(i / 10)
   tlMoon.timeScale(i / 10)
   i += 0.2
-  now = Date.now()
 }
 </script>
 <script>
@@ -412,12 +451,12 @@ export default {
   setup() {},
   data() {
     return {
-      counter: 0,
-      showNumber: 0,
-      start: 0,
-      end: 10000,
-      duration: 3,
-      format: true
+      // counter: 0,
+      // showNumber: 0,
+      // start: 0,
+      // end: 10000,
+      // duration: 3,
+      // format: true
     }
   },
   watch: {
