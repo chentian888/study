@@ -10,7 +10,6 @@ export default class Ball {
     this.scaleX = 1
     this.scaleY = 1
     this.angle = 0
-    this.SWING = 190
     this.ctx = null
     this.canvas = null
     Object.assign(this, props)
@@ -24,20 +23,39 @@ export default class Ball {
     return this
   }
 
+  // 线性运动-左右运动
   moveBetweenLeftAndRight() {
     const _this = this
+    const swing = 190
     const { W, H, SWING, ctx } = this
     window.requestAnimationFrame(() => {
       _this.moveBetweenLeftAndRight()
     })
 
     ctx.clearRect(0, 0, W, H)
-    this.x = W / 2 + Math.sin(this.angle) * SWING
+    this.x = W / 2 + Math.sin(this.angle) * swing
     this.angle += 0.05
     this.angle %= Math.PI * 2
     this.render()
     console.log(this.ctx)
   }
+
+  // 线性运动-正旋波运动
+  moveUpAndDown() {
+    const _this = this
+    const { W, H, ctx } = this
+    const swing = 50
+    window.requestAnimationFrame(() => {
+      _this.moveUpAndDown()
+    })
+    ctx.clearRect(0, 0, W, H)
+    this.x += 0.5
+    this.y = H / 2 + Math.sin(this.angle) * swing
+    this.angle += 0.05
+    this.angle %= Math.PI * 2
+    this.render()
+  }
+
   render() {
     const { ctx, x, y, r, fillStyle, strokeStyle, scaleX, scaleY } = this
     ctx.save()

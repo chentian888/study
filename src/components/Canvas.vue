@@ -24,7 +24,8 @@ onMounted(async () => {
 
   const ball = new Ball()
   ball.render()
-  ball.moveBetweenLeftAndRight()
+  // ball.moveBetweenLeftAndRight()
+  ball.moveUpAndDown()
 })
 </script>
 
