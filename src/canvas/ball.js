@@ -27,7 +27,7 @@ export default class Ball {
   moveBetweenLeftAndRight() {
     const _this = this
     const swing = 190
-    const { W, H, SWING, ctx } = this
+    const { W, H, ctx } = this
     window.requestAnimationFrame(() => {
       _this.moveBetweenLeftAndRight()
     })
@@ -73,6 +73,29 @@ export default class Ball {
     this.render()
   }
 
+  moveCircle() {
+    const _this = this
+    const { W, H, ctx, r } = this
+    window.requestAnimationFrame(() => {
+      _this.moveCircle()
+    })
+    ctx.clearRect(0, 0, W, H)
+
+    this.x = W / 2 + 150 * Math.cos(this.angle)
+    console.log(this.x)
+    this.renderCircle()
+    this.render()
+    
+  }
+  renderCircle() {
+    const { W, H, ctx } = this
+    ctx.save()
+    ctx.beginPath()
+    ctx.arc(W / 2, H / 2, 150, 0, Math.PI * 2)
+    ctx.stroke()
+    ctx.restore()
+  }
+  renderEllipse() {}
   render() {
     const { ctx, x, y, r, fillStyle, strokeStyle, scaleX, scaleY } = this
     ctx.save()

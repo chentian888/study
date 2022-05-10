@@ -23,10 +23,12 @@ onMounted(async () => {
   // arrow.flowMouseAndRotate()
 
   const ball = new Ball()
+  ball.renderCircle()
   ball.render()
   // ball.moveBetweenLeftAndRight()
   // ball.moveUpAndDown()
-  ball.scaleXY()
+  // ball.scaleXY()
+  ball.moveCircle()
 })
 </script>
 
