@@ -23,7 +23,7 @@ export default class Ball {
     return this
   }
 
-  // 线性运动-左右运动
+  // 平滑运动-左右运动
   moveBetweenLeftAndRight() {
     const _this = this
     const swing = 190
@@ -44,13 +44,30 @@ export default class Ball {
   moveUpAndDown() {
     const _this = this
     const { W, H, ctx } = this
-    const swing = 50
+    const swing = 90
     window.requestAnimationFrame(() => {
       _this.moveUpAndDown()
     })
     ctx.clearRect(0, 0, W, H)
-    this.x += 0.5
+    this.x += 2
     this.y = H / 2 + Math.sin(this.angle) * swing
+    this.angle += 0.05
+    this.angle %= Math.PI * 2
+    this.render()
+  }
+
+  // 脉冲运动-放大缩小
+  scaleXY() {
+    const _this = this
+    const { W, H, ctx } = this
+    const swing = 1
+
+    window.requestAnimationFrame(() => {
+      _this.scaleXY()
+    })
+    ctx.clearRect(0, 0, W, H)
+
+    this.r += Math.sin(this.angle) * swing
     this.angle += 0.05
     this.angle %= Math.PI * 2
     this.render()
@@ -61,9 +78,9 @@ export default class Ball {
     ctx.save()
     ctx.beginPath()
     ctx.arc(x, y, r, 0, Math.PI * 2)
+    ctx.scale(2, 3)
     ctx.fillStyle = fillStyle
     ctx.strokeStyle = strokeStyle
-    ctx.scale(scaleX, scaleY)
     ctx.fill()
     ctx.stroke()
     ctx.restore()
