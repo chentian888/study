@@ -21,14 +21,22 @@ onMounted(async () => {
   // arrow.drawArrow().render()
   // arrow.rotateArrow()
   // arrow.flowMouseAndRotate()
+  // arrow.autoRotate()
 
-  const ball = new Ball()
-  ball.renderCircle()
+  // const ball = new Ball()
+  const ball = new Ball({ x: 50, y: 50 })
+  // ball.renderCircle()
+  // ball.renderEllipse()
   ball.render()
+
   // ball.moveBetweenLeftAndRight()
   // ball.moveUpAndDown()
   // ball.scaleXY()
-  ball.moveCircle()
+  // ball.moveCircle()
+  // ball.moveEllipse()
+  // ball.vector()
+  // ball.velocity()
+  ball.jump()
 })
 </script>
 

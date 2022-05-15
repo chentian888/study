@@ -19,7 +19,7 @@ class C {
 
   // 角度转弧度
   static toRad(angle) {
-    return ang * (Math.PI / 180)
+    return angle * (Math.PI / 180)
   }
 
   // 弧度转角度

@@ -12,6 +12,7 @@ export default class Arrow {
     this.rotation = 0
     this.ctx = null
     this.canvas = null
+    this.rotateSpeed = 1
     Object.assign(this, props)
     this.initCanvas()
   }
@@ -41,18 +42,39 @@ export default class Arrow {
   }
 
   flowMouseAndRotate() {
-    const { x, y, ctx, W, H, w, h } = this
+    const { ctx, W, H, w, h } = this
     this.canvas.addEventListener('mousemove', (ev) => {
       const { x: courseX, y: courseY } = C.eventWrapper(ev)
-      const dx = courseX - this.W / 2
-      const dy = courseY - this.H / 2
-      this.rotation = Math.atan2(dy, dx)
-      this.x = courseX
-      this.y = courseY
+      const speed = 3
+      const dx = courseX - this.x
+      const dy = courseY - this.y
+      const radian = Math.atan2(dy, dx)
+      console.log(radian)
+      const vx = speed * Math.cos(radian)
+      const vy = speed * Math.sin(radian)
+      this.x += vx
+      this.y += vy
+      this.rotation = radian
       ctx.clearRect(0, 0, W, H)
       this.render()
     })
   }
+
+  autoRotate() {
+    const _this = this
+    const { ctx, W, H, w, h } = this
+    window.requestAnimationFrame(() => {
+      _this.autoRotate()
+    })
+    this.rotateSpeed += 3
+    let radian = this.rotateSpeed * (Math.PI / 180)
+    radian %= Math.PI * 2
+    this.rotation = radian
+    this.rao
+    ctx.clearRect(0, 0, W, H)
+    this.render()
+  }
+
   drawArrow() {
     const { ctx, w, h } = this
     ctx.beginPath()
