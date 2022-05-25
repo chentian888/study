@@ -9,7 +9,9 @@ import { nextTick, onMounted } from 'vue'
 import MathAtant from '../canvas/atan'
 import Arrow from '../canvas/arrow'
 import Ball from '../canvas/ball'
-import Ball2 from '../canvas/ball2'
+// import boundaryRemove, { init } from '../canvas/boundaryRemove'
+import boundaryRound, { init } from '../canvas/boundaryRound'
+// import boundaryLanuch, { init } from '../canvas/boundaryLanuch'
 import C from '../canvas/utils'
 
 onMounted(async () => {
@@ -41,49 +43,8 @@ onMounted(async () => {
   // ball.jump()
 
   // 运动边界
-
-  const canvas = document.getElementById('stage')
-  const ctx = canvas.getContext('2d')
-  const W = (canvas.width = 800)
-  const H = (canvas.height = 600)
-
-  const ballList = []
-  for (let i = 0; i < 10; i++) {
-    // const r = Math.random() > 0.9 ? C.random([20, 50]) : C.random([10, 30])
-    ballList.push(
-      new Ball2({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 20 + 30,
-        fillStyle: C.color(),
-        vx: (Math.random() - 0.5) * 3,
-        vy: (Math.random() - 0.5) * 3
-      })
-    )
-  }
-
-  function ballMove(ball, index) {
-    ball.x += ball.vx
-    ball.y += ball.vy
-
-    if (ball.x - ball.r >= W || ball.x + ball.r <= 0 || ball.y - ball.r >= H || ball.Y + ball.r <= 0) {
-      ballList.splice(index, 1)
-      console.log('移除', ball)
-    }
-    ball.render(ctx)
-  }
-
-  function move() {
-    window.requestAnimationFrame(() => {
-      move()
-    })
-    ctx.clearRect(0, 0, W, H)
-    let len = ballList.length
-    while (len--) {
-      ballMove(ballList[len], len)
-    }
-  }
-  move()
+  init()
+  boundaryRound()
 })
 </script>
 
