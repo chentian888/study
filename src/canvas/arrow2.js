@@ -13,19 +13,6 @@ export default class Arrow {
     Object.assign(this, props)
   }
 
-  rotateArrow(ctx) {
-    const { x, y, W, H } = this
-    this.canvas.addEventListener('mousemove', (ev) => {
-      const { x: courseX, y: courseY } = C.eventWrapper(ev)
-      const dx = courseX - x
-      const dy = courseY - y
-      this.rotation = Math.atan2(dy, dx)
-      ctx.clearRect(0, 0, W, H)
-      this.render()
-    })
-    return this
-  }
-
   drawArrow(ctx) {
     const { w, h } = this
     ctx.beginPath()
@@ -43,7 +30,6 @@ export default class Arrow {
 
   render(ctx) {
     const { x, y, fillStyle, rotation } = this
-    console.log(x, y)
     ctx.save()
     ctx.fillStyle = fillStyle
     ctx.strokeStyle = fillStyle
