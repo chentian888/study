@@ -27,13 +27,9 @@
       <router-view></router-view>
     </div>
   </div>
-
-  <!-- <Stage></Stage> -->
 </template>
 
-<script setup>
-// import Stage from '../components/Canvas.vue'
-</script>
+<script setup></script>
 
 <style scoped>
 .wrapper {

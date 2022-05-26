@@ -4,8 +4,7 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
-import C from './utils'
-import Ball from './utils/ball'
+import Atan from './utils/atan'
 onMounted(async () => {
   await nextTick()
   const canvas = document.getElementById('stage')
@@ -13,7 +12,7 @@ onMounted(async () => {
   const W = (canvas.width = 800)
   const H = (canvas.height = 600)
 
-  const ball = new Ball({ x: W / 2, y: H / 2, fillStyle: C.color() }).render(ctx)
+  new Atan({ w: W, h: H, stage: canvas }).drawCoord(ctx).addMouseMoveEvent(ctx)
 })
 </script>
 
