@@ -13,7 +13,30 @@ onMounted(async () => {
   const W = (canvas.width = 800)
   const H = (canvas.height = 600)
 
-  const ball = new Ball({ x: W / 2, y: H / 2, fillStyle: C.color() }).render(ctx)
+  const ball = new Ball({ x: 50, y: 50, vx: 0, vy: 0, fillStyle: C.color() }).render(ctx)
+
+  // 加速度 ax是加速度 v+=vx vx+=ax
+  function velocity() {
+    window.requestAnimationFrame(() => {
+      velocity()
+    })
+    ctx.clearRect(0, 0, W, H)
+    // 方向
+    const angle = 30
+
+    // 30°方向上的加速度
+    const a = 0.2
+    const radian = C.toRad(angle)
+    const ax = a * Math.cos(radian)
+    const ay = a * Math.sin(radian)
+
+    ball.x += ball.vx
+    ball.y += ball.vy
+    ball.vx += ax
+    ball.vy += ay
+    ball.render(ctx)
+  }
+  velocity()
 })
 </script>
 

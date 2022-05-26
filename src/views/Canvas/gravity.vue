@@ -13,7 +13,26 @@ onMounted(async () => {
   const W = (canvas.width = 800)
   const H = (canvas.height = 600)
 
-  const ball = new Ball({ x: W / 2, y: H / 2, fillStyle: C.color() }).render(ctx)
+  const ball = new Ball({ x: W / 2, y: 50, vx: 0, vy: 0, fillStyle: C.color() }).render(ctx)
+  // 重力加速度
+  function move() {
+    const id = window.requestAnimationFrame(() => {
+      move()
+    })
+    ctx.clearRect(0, 0, W, H)
+
+    // 垂直方向上的加速度
+    const ay = 0.2
+
+    ball.y += ball.vy
+    ball.vy += ay
+    if (ball.y + ball.r >= H) {
+      ball.y = H - ball.r
+      ball.vy *= -0.9
+    }
+    ball.render(ctx)
+  }
+  move()
 })
 </script>
 
