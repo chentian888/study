@@ -10,8 +10,10 @@ import MathAtant from '../canvas/atan'
 import Arrow from '../canvas/arrow'
 import Ball from '../canvas/ball'
 // import boundaryRemove, { init } from '../canvas/boundaryRemove'
-import boundaryRound, { init } from '../canvas/boundaryRound'
+// import boundaryRound, { init } from '../canvas/boundaryRound'
 // import boundaryLanuch, { init } from '../canvas/boundaryLanuch'
+import boundaryBounce, { init } from '../canvas/boundaryBounce'
+
 import C from '../canvas/utils'
 
 onMounted(async () => {
@@ -44,7 +46,7 @@ onMounted(async () => {
 
   // 运动边界
   init()
-  boundaryRound()
+  boundaryBounce()
 })
 </script>
 

@@ -11,40 +11,48 @@ export function init() {
   W = canvas.width = 800
   H = canvas.height = 600
 
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 100; i++) {
     // const r = Math.random() > 0.9 ? C.random([20, 50]) : C.random([10, 30])
     ballList.push(
       new Ball2({
-        x: Math.random() * W,
-        y: Math.random() * H,
-        r: Math.random() * 20 + 30,
+        x: C.random([0, W]),
+        y: C.random([0, H]),
+        r: C.random([20, 50]),
         fillStyle: C.color(),
-        vx: (Math.random() - 0.5) * 3,
-        vy: (Math.random() - 0.5) * 3
+        vx: C.random([5, -5]),
+        vy: C.random([10, -10])
       })
     )
   }
 }
 
-function ballMove(ball, index) {
+function ballMove(ball) {
+  if (ball.x + ball.r >= W) {
+    ball.x = W - ball.r
+    ball.vx *= -1
+  }
+  if (ball.x - ball.r <= 0) {
+    ball.x = ball.r
+    ball.vx *= -1
+  }
+  if (ball.y + ball.r >= H) {
+    ball.y = H - ball.r
+    ball.vy *= -1
+  }
+  if (ball.y - ball.r <= 0) {
+    ball.y = ball.r
+    ball.vy *= -1
+  }
   ball.x += ball.vx
   ball.y += ball.vy
-
-  if (ball.x - ball.r >= W || ball.x + ball.r <= 0 || ball.y - ball.r >= H || ball.Y + ball.r <= 0) {
-    ballList.splice(index, 1)
-    console.log('移除', index, ball)
-  }
   ball.render(ctx)
 }
 
-function boundaryRemove() {
+function boundaryBounce() {
   window.requestAnimationFrame(() => {
-    boundaryRemove()
+    boundaryBounce()
   })
   ctx.clearRect(0, 0, W, H)
-  let len = ballList.length
-  while (len--) {
-    ballMove(ballList[len], len)
-  }
+  ballList.forEach(ballMove)
 }
-export default boundaryRemove
+export default boundaryBounce
