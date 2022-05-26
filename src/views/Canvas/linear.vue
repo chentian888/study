@@ -14,6 +14,20 @@ onMounted(async () => {
   const H = (canvas.height = 600)
 
   const ball = new Ball({ x: W / 2, y: H / 2, fillStyle: C.color() }).render(ctx)
+  function move() {
+    window.requestAnimationFrame(() => {
+      move()
+    })
+    const swing = 90
+    ctx.clearRect(0, 0, W, H)
+    ball.x += 2
+    ball.y = H / 2 + Math.sin(ball.angle) * swing
+    // ball.y = H / 2 + Math.cos(ball.angle) * swing
+    ball.angle += 0.05
+    ball.angle %= Math.PI * 2
+    ball.render(ctx)
+  }
+  move()
 })
 </script>
 

@@ -1,7 +1,6 @@
 class C {
   static getOffset(ele) {
     let mouse = { x: 0, y: 0 }
-    console.log(ele)
     ele.addEventListener('mousemove', (ev) => {
       const { x, y } = this.eventWrapper(ev)
       mouse.x = x
