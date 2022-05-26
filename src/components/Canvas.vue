@@ -1,6 +1,7 @@
 <template>
   <div id="canvas">
     <canvas class="stageStyle" id="stage"></canvas>
+    <router-view></router-view>
   </div>
 </template>
 
