@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Game from '../views/Game.vue'
-import Run from '../views/Run.vue'
 import Canvas from '../views/Canvas/index.vue'
 import Ball from '../views/Canvas/ball.vue'
 import Atan from '../views/Canvas/atan.vue'
@@ -26,7 +25,6 @@ import BoundBounce from '../views/Canvas/boundBounce.vue'
 const routes = [
   { path: '/', component: Home },
   { path: '/game', component: Game },
-  { path: '/run', component: Run },
   {
     path: '/canvas',
     component: Canvas,
