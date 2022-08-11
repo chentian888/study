@@ -5,17 +5,16 @@
 <script setup>
 import { onMounted } from 'vue'
 import { Application, Loader, Container, Sprite } from 'pixi.js'
+import gsap from 'gsap'
 import AlloyTouch from 'alloytouch'
 import { page1Img, page2Img, page3Img, page4Img, spriteGroupBgEle, page1Ele, page2Ele, page3Ele, page4Ele } from './data.js'
 
-const app = new Application({
-  width: 750,
-  height: 1440
-})
+let app = null
+
+const allTimeline = gsap.timeline({ paused: true })
+const max = -10800 - 750
 
 onMounted(() => {
-  const box = document.querySelector('.grow-box')
-  box.appendChild(app.view)
   load()
 })
 
@@ -38,6 +37,13 @@ function load() {
 
 // init container and set touch event
 function onAssetsLoaded() {
+  app = new Application({
+    width: 750,
+    height: 1440
+  })
+  const box = document.querySelector('.grow-box')
+  box.appendChild(app.view)
+
   // bg container
   const spriteGroupBg = new Container()
   spriteGroupBg.name = 'spriteGroupBg'
@@ -77,7 +83,7 @@ function onAssetsLoaded() {
   // last page container
   const spriteGroupLast = new Container()
   spriteGroupLast.name = 'spriteGroupLast'
-  spriteGroupLast.position.set(0, 0)
+  spriteGroupLast.position.set(-203, 0)
   app.stage.addChild(spriteGroupLast)
 
   const imgArr = []
@@ -90,6 +96,9 @@ function onAssetsLoaded() {
   imgArr.forEach((ele) => {
     addSprToGroup(ele)
   })
+
+  //各种滑动和动画
+  tweenAction()
 
   bindTouchAction()
 }
@@ -116,22 +125,19 @@ function addSprToGroup({ img = '', x = '', y = '', sprName = '', sprGroup = '', 
 
 // bind touch action
 function bindTouchAction() {
-  const min = -10800 - 750
+  const sence = app.stage.getChildByName('spriteGroupSences')
   const alloyTouch = new AlloyTouch({
-    touch: '.grow-box', //反馈触摸的dom
+    touch: 'body', //反馈触摸的dom
     vertical: true, //不必需，默认是true代表监听竖直方向touch
-    property: 'translateY', //被运动的属性
-    min: min, //不必需,运动属性的最小值
+    min: -3600, //不必需,运动属性的最小值
     max: 0, //不必需,滚动属性的最大值
-    sensitivity: 0.1, //不必需,触摸区域的灵敏度，默认值为1，可以为负数
-    factor: 10, //不必需,表示触摸位移运动位移与被运动属性映射关系，默认值是1
-    moveFactor: 10, //不必需,表示touchmove位移与被运动属性映射关系，默认值是1
     bindSelf: false,
-    maxSpeed: 2, //不必需，触摸反馈的最大速度限制
+    maxSpeed: 0.8, //不必需，触摸反馈的最大速度限制
     value: 0,
     change: function (value) {
-      const progress = value / min
+      const progress = value / max
       console.log(value, progress)
+      allTimeline.seek(progress)
     },
     touchStart: function (evt, value) {},
     touchMove: function (evt, value) {},
@@ -140,6 +146,18 @@ function bindTouchAction() {
     pressMove: function (evt, value) {},
     animationEnd: function (value) {} //运动结束
   })
+}
+
+function tweenAction() {
+  const sence = app.stage.getChildByName('spriteGroupSences')
+  const sencesTimeline = gsap.timeline({ delay: 0 })
+  const sencesTween = gsap.to(sence, { x: max })
+  sencesTimeline.add(sencesTween)
+  allTimeline.add(sencesTimeline)
+
+  // 星星
+
+  // 房子
 }
 </script>
 

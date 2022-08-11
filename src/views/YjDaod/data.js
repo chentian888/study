@@ -68,11 +68,11 @@ export const page1Ele = [
 
 export const page2Ele = [
   { img: page2Img[0], x: 0, y: 816, sprName: 'p21', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
-  { img: page2Img[1], x: 1508, y: 262, sprName: 'p2Boy', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
+  { img: page2Img[5], x: 613, y: 31, sprName: 'p2School', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
   { img: page2Img[2], x: 1298, y: 414, sprName: 'p2Huati', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
+  { img: page2Img[1], x: 1508, y: 262, sprName: 'p2Boy', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
   { img: page2Img[3], x: 1932, y: 307, sprName: 'p2Lotsofyinfu', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
   { img: page2Img[4], x: 144, y: 768, sprName: 'p2Mother', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
-  { img: page2Img[5], x: 613, y: 31, sprName: 'p2School', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
   { img: page2Img[6], x: 1200, y: 1149, sprName: 'p2Shitou', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
   { img: page2Img[7], x: 1932, y: 49, sprName: 'p2Tree4', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
   { img: page2Img[8], x: 2243, y: 349, sprName: 'p2Wutai', sprGroup: 'spriteGroupSences/sence2', alpah: 1 },
@@ -80,8 +80,8 @@ export const page2Ele = [
 ]
 
 export const page3Ele = [
-  { img: page3Img[0], x: 0, y: 80, sprName: 'p31', sprGroup: 'spriteGroupSences/sence3', alpah: 1 },
   { img: page3Img[1], x: 826, y: 142, sprName: 'p32', sprGroup: 'spriteGroupSences/sence3', alpah: 1 },
+  { img: page3Img[0], x: 0, y: 80, sprName: 'p31', sprGroup: 'spriteGroupSences/sence3', alpah: 1 },
   { img: page3Img[2], x: 971, y: 24, sprName: 'p33', sprGroup: 'spriteGroupSences/sence3', alpah: 1 },
   { img: page3Img[3], x: 2397, y: 453, sprName: 'p3Childbirth', sprGroup: 'spriteGroupSences/sence3', alpah: 1 }
 ]
