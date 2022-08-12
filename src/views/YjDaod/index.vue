@@ -5,9 +5,13 @@
 <script setup>
 import { onMounted } from 'vue'
 import { Application, Loader, Container, Sprite } from 'pixi.js'
-import gsap from 'gsap'
-import AlloyTouch from 'alloytouch'
+import * as PIXI from 'pixi.js'
+import { gsap } from 'gsap'
+import { PixiPlugin } from 'gsap/PixiPlugin'
+import PhyTouch from 'phy-touch'
 import { page1Img, page2Img, page3Img, page4Img, spriteGroupBgEle, page1Ele, page2Ele, page3Ele, page4Ele } from './data.js'
+gsap.registerPlugin(PixiPlugin)
+PixiPlugin.registerPIXI(PIXI)
 
 let app = null
 
@@ -39,7 +43,8 @@ function load() {
 function onAssetsLoaded() {
   app = new Application({
     width: 750,
-    height: 1440
+    height: 1440,
+    resolution: window.devicePixelRatio || 1
   })
   const box = document.querySelector('.grow-box')
   box.appendChild(app.view)
@@ -57,7 +62,8 @@ function onAssetsLoaded() {
   app.stage.addChild(spriteGroupSences)
   // sence1
   const sence1 = new Container()
-  sence1.position.set(0, 0)
+  sence1.pivot.set(1784, 621)
+  sence1.position.set(1784, 621)
   sence1.name = 'sence1'
 
   // sence2
@@ -104,13 +110,19 @@ function onAssetsLoaded() {
 }
 
 // set the element to the corresponding scene
-function addSprToGroup({ img = '', x = '', y = '', sprName = '', sprGroup = '', alpah = '' }) {
-  const sprite = new Sprite.from(img)
-  sprite.position.set(x, y)
-  sprite.name = sprName
-  sprite.alpah = alpah
+function addSprToGroup(item) {
+  const sprite = new Sprite.from(item.img)
+  sprite.position.set(item.x, item.y)
+  sprite.name = item.sprName
+  sprite.alpha = item.alpha
+  if (item.pivotX && item.pivotY) {
+    sprite.pivot.set(item.pivotX, item.pivotY)
+    sprite.position.set(item.x + item.pivotX, item.y + item.pivotY)
+  } else {
+    sprite.position.set(item.x, item.y)
+  }
 
-  const containers = sprGroup.split('/')
+  const containers = item.sprGroup.split('/')
   let parent = app.stage.getChildByName(containers[0])
 
   const len = containers.length
@@ -126,38 +138,65 @@ function addSprToGroup({ img = '', x = '', y = '', sprName = '', sprGroup = '', 
 // bind touch action
 function bindTouchAction() {
   const sence = app.stage.getChildByName('spriteGroupSences')
-  const alloyTouch = new AlloyTouch({
-    touch: 'body', //反馈触摸的dom
-    vertical: true, //不必需，默认是true代表监听竖直方向touch
-    min: -3600, //不必需,运动属性的最小值
-    max: 0, //不必需,滚动属性的最大值
+  const alloyTouch = new PhyTouch({
+    touch: 'body', // 反馈触摸的dom
+    vertical: true, // 不必需，默认是true代表监听竖直方向touch
+    target: { x: 0 }, // 运动的对象
+    property: 'x', // 被运动的属性
+    sensitivity: 0.2,
+    min: -3400, // 不必需,运动属性的最小值
+    max: 0, // 不必需,滚动属性的最大值
+    // moveFactor: 3,
     bindSelf: false,
-    maxSpeed: 0.8, //不必需，触摸反馈的最大速度限制
+    maxSpeed: 0.8, // 不必需，触摸反馈的最大速度限制
     value: 0,
     change: function (value) {
       const progress = value / max
       console.log(value, progress)
       allTimeline.seek(progress)
-    },
-    touchStart: function (evt, value) {},
-    touchMove: function (evt, value) {},
-    touchEnd: function (evt, value) {},
-    tap: function (evt, value) {},
-    pressMove: function (evt, value) {},
-    animationEnd: function (value) {} //运动结束
+    }
   })
 }
 
 function tweenAction() {
   const sence = app.stage.getChildByName('spriteGroupSences')
-  const sencesTimeline = gsap.timeline({ delay: 0 })
+  const sencesTimeline = gsap.timeline()
   const sencesTween = gsap.to(sence, { x: max })
   sencesTimeline.add(sencesTween)
-  allTimeline.add(sencesTimeline)
 
   // 星星
+  const star = sence.getChildByName('sence1').getChildByName('p1Star')
+  const startTime = -20 / max
+  const duration = -10 / max
+  const timelineStar = gsap.timeline()
+  timelineStar.from(star, { pixi: { alpha: 0 }, duration }, startTime)
 
   // 房子
+  const house = sence.getChildByName('sence1')
+  const startTimeHouse = -340 / max
+  const durationHouse = -50 / max
+  const timelineHouse = gsap.timeline()
+  timelineHouse.to(house, { pixi: { scale: 3 }, duration: durationHouse }, startTimeHouse)
+  timelineHouse.to(house, { pixi: { alpha: 0 }, duration: durationHouse }, startTimeHouse)
+
+  // 母亲
+  const mother = sence.getChildByName('sence2')
+  const startTimeMother = -360 / max
+  const durationMother = -40 / max
+  const timelineMother = gsap.timeline()
+  timelineMother.from(mother, { pixi: { alpha: 0 }, duration: durationMother }, startTimeMother)
+
+  // 走路
+
+  // 音符飘动
+
+  // 窗户
+
+  // 工作
+
+  // 旋涡
+
+  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineMother])
 }
 </script>
 

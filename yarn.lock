@@ -1625,11 +1625,6 @@ agent-base@6:
   dependencies:
     debug "4"
 
-alloytouch@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmmirror.com/alloytouch/-/alloytouch-0.3.0.tgz#cc6e509a2ef9a9c8cccf6a091e5e1ca730ebff65"
-  integrity sha512-HtuQYVtiXeuxrrJRkATYUGzeY4bDSnVrV6jhHjaSdfZneqxjKkoapGGsHRdwxvPSQBST2NnV1B5h68kbMoMm7A==
-
 ansi-escapes@^4.2.1:
   version "4.3.2"
   resolved "https://registry.nlark.com/ansi-escapes/download/ansi-escapes-4.3.2.tgz?cache=0&sync_timestamp=1618847144938&other_urls=https%3A%2F%2Fregistry.nlark.com%2Fansi-escapes%2Fdownload%2Fansi-escapes-4.3.2.tgz#6b2291d1db7d98b6521d5f1efa42d0f3a9feb65e"
@@ -3325,6 +3320,11 @@ path-parse@^1.0.6:
   version "1.0.7"
   resolved "https://registry.nlark.com/path-parse/download/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
   integrity sha1-+8EUtgykKzDZ2vWFjkvWi77bZzU=
+
+phy-touch@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.npmmirror.com/phy-touch/-/phy-touch-0.1.1.tgz#fe3b50089c139ed58a082e40f0d36f748d3bb36e"
+  integrity sha512-1HtZN7qC+G0qEMzOsGMiUFwRckHserZEbMHrfc8wPdypsRNyyyXu8IPneSIgJFKOLmSVwJlHCL7HThSdJpnlgQ==
 
 picomatch@^2.0.4, picomatch@^2.2.3:
   version "2.3.0"
