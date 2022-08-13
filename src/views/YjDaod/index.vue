@@ -4,12 +4,12 @@
 
 <script setup>
 import { onMounted } from 'vue'
-import { Application, Loader, Container, Sprite } from 'pixi.js'
+import { Application, Loader, Container, Sprite, Texture } from 'pixi.js'
 import * as PIXI from 'pixi.js'
 import { gsap } from 'gsap'
 import { PixiPlugin } from 'gsap/PixiPlugin'
 import PhyTouch from 'phy-touch'
-import { page1Img, page2Img, page3Img, page4Img, spriteGroupBgEle, page1Ele, page2Ele, page3Ele, page4Ele } from './data.js'
+import { page1Img, page2Img, page3Img, page4Img, spriteGroupBgEle, page1Ele, page2Ele, page2ImgChild, page3Ele, page4Ele } from './data.js'
 gsap.registerPlugin(PixiPlugin)
 PixiPlugin.registerPIXI(PIXI)
 
@@ -26,7 +26,7 @@ function load() {
   // const loader = new Loader()
   // loader.add('spritesheet', 'https://pixijs.io/examples/examples/assets/spritesheet/mc.json').load(onAssetsLoaded)
   const loader = new Loader()
-  loader.add(page1Img).add(page2Img).add(page3Img).add(page4Img)
+  loader.add(page1Img).add(page2Img).add(page2ImgChild).add(page3Img).add(page4Img)
   loader.load((loader, resources) => {
     console.log('loader===', loader)
     console.log('resources===', resources)
@@ -154,6 +154,7 @@ function bindTouchAction() {
       const progress = value / max
       console.log(value, progress)
       allTimeline.seek(progress)
+      animationPlay(progress)
     }
   })
 }
@@ -171,7 +172,7 @@ function tweenAction() {
   const timelineStar = gsap.timeline()
   timelineStar.from(star, { pixi: { alpha: 0 }, duration }, startTime)
 
-  // 房子
+  // house
   const house = sence.getChildByName('sence1')
   const startTimeHouse = -340 / max
   const durationHouse = -50 / max
@@ -179,12 +180,12 @@ function tweenAction() {
   timelineHouse.to(house, { pixi: { scale: 3 }, duration: durationHouse }, startTimeHouse)
   timelineHouse.to(house, { pixi: { alpha: 0 }, duration: durationHouse }, startTimeHouse)
 
-  // 母亲
+  // sence2
   const mother = sence.getChildByName('sence2')
-  const startTimeMother = -360 / max
-  const durationMother = -40 / max
-  const timelineMother = gsap.timeline()
-  timelineMother.from(mother, { pixi: { alpha: 0 }, duration: durationMother }, startTimeMother)
+  const startTimeSence2 = -360 / max
+  const durationSence2 = -40 / max
+  const timelineSence2 = gsap.timeline()
+  timelineSence2.from(mother, { pixi: { alpha: 0 }, duration: durationSence2 }, startTimeSence2)
 
   // 走路
 
@@ -196,7 +197,25 @@ function tweenAction() {
 
   // 旋涡
 
-  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineMother])
+  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineSence2])
+}
+
+function animationPlay(progress) {
+  // children walk
+  const startTimeWalk = -550 / max
+  const durationWalk = -550 / max
+  // console.log('total=====', startTimeWalk, progress)
+  if (progress > startTimeWalk) {
+    const total = page2ImgChild.length
+    const diff = progress - startTimeWalk
+    const p2Child = app.stage.getChildByName('spriteGroupSences').getChildByName('sence2').getChildByName('p2Child')
+    const index = Math.floor((diff / durationWalk) * total)
+    console.log('total=====', diff / durationWalk)
+    if (index >= 0 && index < total) {
+      console.log('index=====', index)
+      p2Child.texture = new Texture.from(page2ImgChild[index])
+    }
+  }
 }
 </script>
 

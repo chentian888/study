@@ -29,8 +29,10 @@ export const page2Img = [
   'src/assets/img/yjdaod/p2-wutai.png',
   'src/assets/img/yjdaod/p2-yinfu.png'
 ]
+
+export const page2ImgChild = []
 for (let i = 1; i <= 34; i++) {
-  page2Img.push(`src/assets/img/yjdaod/w${i}.png`)
+  page2ImgChild.push(`src/assets/img/yjdaod/w${i}.png`)
 }
 
 // sence3
@@ -76,7 +78,8 @@ export const page2Ele = [
   { img: page2Img[6], x: 1200, y: 1149, sprName: 'p2Shitou', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[7], x: 1932, y: 49, sprName: 'p2Tree4', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[8], x: 2243, y: 349, sprName: 'p2Wutai', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
-  { img: page2Img[9], x: 3009, y: 273, sprName: 'p2Yinfu', sprGroup: 'spriteGroupSences/sence2', alpha: 1 }
+  { img: page2Img[9], x: 3009, y: 273, sprName: 'p2Yinfu', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
+  { img: page2ImgChild[0], x: 0, y: 0, sprName: 'p2Child', sprGroup: 'spriteGroupSences/sence2', alpha: 1 }
 ]
 
 export const page3Ele = [
