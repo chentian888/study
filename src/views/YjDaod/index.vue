@@ -1,9 +1,14 @@
 <template>
-  <div class="grow-box"></div>
+  <div class="grow-box">
+    <div v-if="percent !== 100" class="fixed bg-black w-full h-full bg-opacity-25 flex justify-center items-center">
+      <div class="rounded-md bg-black bg-opacity-75 text text-white text-lg w-36 h-36 flex justify-center items-center">{{ percent }}%</div>
+    </div>
+    <div id="stage" class="w-full"></div>
+  </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted } from 'vue'
 import { Application, Loader, Container, Sprite, Texture } from 'pixi.js'
 import * as PIXI from 'pixi.js'
 import { gsap } from 'gsap'
@@ -27,6 +32,7 @@ gsap.registerPlugin(PixiPlugin)
 PixiPlugin.registerPIXI(PIXI)
 
 let app = null
+const percent = ref(0)
 
 const allTimeline = gsap.timeline({ paused: true })
 const max = -10800 - 750
@@ -45,6 +51,7 @@ function load() {
     console.log('resources===', resources)
   })
   loader.onProgress.add(({ progress }) => {
+    percent.value = Math.ceil(progress)
     console.log('progress', progress)
   })
   loader.onComplete.add(() => {
@@ -57,9 +64,10 @@ function onAssetsLoaded() {
   app = new Application({
     width: 750,
     height: 1440,
-    resolution: window.devicePixelRatio || 1
+    transparent: true
   })
-  const box = document.querySelector('.grow-box')
+  // const box = document.querySelector('.grow-box')
+  const box = document.getElementById('stage')
   box.appendChild(app.view)
 
   // bg container
@@ -164,7 +172,7 @@ function bindTouchAction() {
     bindSelf: false,
     maxSpeed: 0.8, // 不必需，触摸反馈的最大速度限制
     value: 0,
-    change: function (value) {
+    change(value) {
       const progress = value / max
       console.log(value, progress)
       allTimeline.seek(progress)
@@ -264,7 +272,7 @@ function animationPlay(progress) {
 
 <style lang="scss">
 .grow-box {
-  > canvas {
+  canvas {
     max-width: 100%;
   }
 }
