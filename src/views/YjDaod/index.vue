@@ -187,8 +187,6 @@ function tweenAction() {
   const timelineSence2 = gsap.timeline()
   timelineSence2.from(mother, { pixi: { alpha: 0 }, duration: durationSence2 }, startTimeSence2)
 
-  // 走路
-
   // 音符飘动
 
   // 窗户
@@ -210,9 +208,7 @@ function animationPlay(progress) {
     const diff = progress - startTimeWalk
     const p2Child = app.stage.getChildByName('spriteGroupSences').getChildByName('sence2').getChildByName('p2Child')
     const index = Math.floor((diff / durationWalk) * total)
-    console.log('total=====', diff / durationWalk)
     if (index >= 0 && index < total) {
-      console.log('index=====', index)
       p2Child.texture = new Texture.from(page2ImgChild[index])
     }
   }
