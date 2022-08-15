@@ -50,8 +50,10 @@ export const page4Img = [
   'src/assets/img/yjdaod/p4-house3.png',
   'src/assets/img/yjdaod/p4-start.png'
 ]
+
+export const page5Img = []
 for (let i = 1; i <= 52; i++) {
-  page4Img.push(`src/assets/img/yjdaod/x${i}.png`)
+  page5Img.push(`src/assets/img/yjdaod/x${i}.png`)
 }
 
 export const spriteGroupBgEle = [{ img: page1Img[0], x: 0, y: 0, alpha: 1, sprName: 'bgSpr', sprGroup: 'spriteGroupBg' }]
@@ -95,3 +97,5 @@ export const page4Ele = [
   { img: page4Img[2], x: 0, y: 0, sprName: 'p4House3', sprGroup: 'spriteGroupSences/sence4', alpha: 1 },
   { img: page4Img[3], x: 1398, y: 0, sprName: 'p4Start', sprGroup: 'spriteGroupSences/sence4', alpha: 1 }
 ]
+
+export const spriteGroupLastEle = [{ img: page5Img[0], x: 0, y: 0, alpha: 1, sprName: 'bgLast', sprGroup: 'spriteGroupLast' }]

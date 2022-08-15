@@ -9,7 +9,20 @@ import * as PIXI from 'pixi.js'
 import { gsap } from 'gsap'
 import { PixiPlugin } from 'gsap/PixiPlugin'
 import PhyTouch from 'phy-touch'
-import { page1Img, page2Img, page3Img, page4Img, spriteGroupBgEle, page1Ele, page2Ele, page2ImgChild, page3Ele, page4Ele } from './data.js'
+import {
+  page1Img,
+  page2Img,
+  page3Img,
+  page4Img,
+  page5Img,
+  spriteGroupBgEle,
+  page1Ele,
+  page2Ele,
+  page2ImgChild,
+  page3Ele,
+  page4Ele,
+  spriteGroupLastEle
+} from './data.js'
 gsap.registerPlugin(PixiPlugin)
 PixiPlugin.registerPIXI(PIXI)
 
@@ -26,7 +39,7 @@ function load() {
   // const loader = new Loader()
   // loader.add('spritesheet', 'https://pixijs.io/examples/examples/assets/spritesheet/mc.json').load(onAssetsLoaded)
   const loader = new Loader()
-  loader.add(page1Img).add(page2Img).add(page2ImgChild).add(page3Img).add(page4Img)
+  loader.add(page1Img).add(page2Img).add(page2ImgChild).add(page3Img).add(page4Img).add(page5Img)
   loader.load((loader, resources) => {
     console.log('loader===', loader)
     console.log('resources===', resources)
@@ -98,6 +111,7 @@ function onAssetsLoaded() {
   imgArr.push(...page2Ele)
   imgArr.push(...page3Ele)
   imgArr.push(...page4Ele)
+  imgArr.push(...spriteGroupLastEle)
 
   imgArr.forEach((ele) => {
     addSprToGroup(ele)
@@ -187,21 +201,21 @@ function tweenAction() {
   const timelineSence2 = gsap.timeline()
   timelineSence2.from(mother, { pixi: { alpha: 0 }, duration: durationSence2 }, startTimeSence2)
 
-  // 音符飘动
+  // yinfu
   const yinfu = sence.getChildByName('sence2').getChildByName('p2Yinfu')
   const startTimeYinfu = -1150 / max
   const durationYinfu = -50 / max
   const timelineYinfu = gsap.timeline()
   timelineYinfu.to(yinfu, { pixi: { alpha: 0, x: 3109 }, duration: durationYinfu }, startTimeYinfu)
 
-  // 窗户
+  // door
   const door = sence.getChildByName('sence3').getChildByName('p32')
   const startTimeDoor = -1230 / max
   const durationDoor = -405 / max
   const timelineDoor = gsap.timeline()
   timelineDoor.from(door, { pixi: { scale: 5, x: 0, y: -20 }, duration: durationDoor }, startTimeDoor)
 
-  // 工作
+  // work
   const work = sence.getChildByName('sence3').getChildByName('p31')
   const startTimeWork = -1350 / max
   const durationWork = -191 / max
@@ -209,15 +223,19 @@ function tweenAction() {
   timelineWork.from(work, { pixi: { alpha: 0 }, duration: durationWork }, startTimeWork)
 
   // 旋涡
+  const lastBg = app.stage.getChildByName('spriteGroupLast')
+  const startTimeLastBg = -3030 / max
+  const durationLastBg = -100 / max
+  const timelineLastBg = gsap.timeline()
+  timelineLastBg.from(lastBg, { pixi: { alpha: 0 }, duration: durationLastBg }, startTimeLastBg)
 
-  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineSence2, timelineYinfu, timelineDoor, timelineWork])
+  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineSence2, timelineYinfu, timelineDoor, timelineWork, timelineLastBg])
 }
 
 function animationPlay(progress) {
   // children walk
   const startTimeWalk = -550 / max
   const durationWalk = -550 / max
-  // console.log('total=====', startTimeWalk, progress)
   if (progress > startTimeWalk) {
     const total = page2ImgChild.length
     const diff = progress - startTimeWalk
@@ -225,6 +243,20 @@ function animationPlay(progress) {
     const index = Math.floor((diff / durationWalk) * total)
     if (index >= 0 && index < total) {
       p2Child.texture = new Texture.from(page2ImgChild[index])
+    }
+  }
+
+  // 旋涡
+  const startTimeLastBg = -2960 / max
+  const durationLastBg = -370 / max
+
+  if (progress > startTimeLastBg) {
+    const diff = progress - startTimeLastBg
+    const total = page5Img.length
+    const index = Math.floor((diff / durationLastBg) * total)
+    const last = app.stage.getChildByName('spriteGroupLast').getChildByName('bgLast')
+    if (index > 0 && index < total) {
+      last.texture = new Texture.from(page5Img[index])
     }
   }
 }
