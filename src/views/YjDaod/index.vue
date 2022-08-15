@@ -188,14 +188,29 @@ function tweenAction() {
   timelineSence2.from(mother, { pixi: { alpha: 0 }, duration: durationSence2 }, startTimeSence2)
 
   // 音符飘动
+  const yinfu = sence.getChildByName('sence2').getChildByName('p2Yinfu')
+  const startTimeYinfu = -1150 / max
+  const durationYinfu = -50 / max
+  const timelineYinfu = gsap.timeline()
+  timelineYinfu.to(yinfu, { pixi: { alpha: 0, x: 3109 }, duration: durationYinfu }, startTimeYinfu)
 
   // 窗户
+  const door = sence.getChildByName('sence3').getChildByName('p32')
+  const startTimeDoor = -1230 / max
+  const durationDoor = -405 / max
+  const timelineDoor = gsap.timeline()
+  timelineDoor.from(door, { pixi: { scale: 5, x: 0, y: -20 }, duration: durationDoor }, startTimeDoor)
 
   // 工作
+  const work = sence.getChildByName('sence3').getChildByName('p31')
+  const startTimeWork = -1350 / max
+  const durationWork = -191 / max
+  const timelineWork = gsap.timeline()
+  timelineWork.from(work, { pixi: { alpha: 0 }, duration: durationWork }, startTimeWork)
 
   // 旋涡
 
-  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineSence2])
+  allTimeline.add([sencesTimeline, timelineStar, timelineHouse, timelineSence2, timelineYinfu, timelineDoor, timelineWork])
 }
 
 function animationPlay(progress) {

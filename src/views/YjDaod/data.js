@@ -73,12 +73,12 @@ export const page2Ele = [
   { img: page2Img[5], x: 613, y: 31, sprName: 'p2School', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[2], x: 1298, y: 414, sprName: 'p2Huati', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[1], x: 1508, y: 262, sprName: 'p2Boy', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
-  { img: page2Img[3], x: 1932, y: 307, sprName: 'p2Lotsofyinfu', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[4], x: 144, y: 768, sprName: 'p2Mother', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[6], x: 1200, y: 1149, sprName: 'p2Shitou', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[7], x: 1932, y: 49, sprName: 'p2Tree4', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[8], x: 2243, y: 349, sprName: 'p2Wutai', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2Img[9], x: 3009, y: 273, sprName: 'p2Yinfu', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
+  { img: page2Img[3], x: 1932, y: 307, sprName: 'p2Lotsofyinfu', sprGroup: 'spriteGroupSences/sence2', alpha: 1 },
   { img: page2ImgChild[0], x: 0, y: 0, sprName: 'p2Child', sprGroup: 'spriteGroupSences/sence2', alpha: 1 }
 ]
 
