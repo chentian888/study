@@ -3,6 +3,9 @@
     <div v-if="percent !== 100" class="fixed bg-black w-full h-full bg-opacity-25 flex justify-center items-center">
       <div class="rounded-md bg-black bg-opacity-75 text text-white text-lg w-36 h-36 flex justify-center items-center">{{ percent }}%</div>
     </div>
+    <div v-if="!dirty && percent === 100" class="absolute inset-y-1/3 inset-x-1/2 text-white animate-bounce">
+      向上滑动屏幕，观看你我的故事
+    </div>
     <div id="stage" class="w-full"></div>
   </div>
 </template>
@@ -33,6 +36,7 @@ PixiPlugin.registerPIXI(PIXI)
 
 let app = null
 const percent = ref(0)
+const dirty = ref(false)
 
 const allTimeline = gsap.timeline({ paused: true })
 const max = -10800 - 750
@@ -159,7 +163,7 @@ function addSprToGroup(item) {
 
 // bind touch action
 function bindTouchAction() {
-  const sence = app.stage.getChildByName('spriteGroupSences')
+  // const sence = app.stage.getChildByName('spriteGroupSences')
   const alloyTouch = new PhyTouch({
     touch: 'body', // 反馈触摸的dom
     vertical: true, // 不必需，默认是true代表监听竖直方向touch
@@ -177,6 +181,9 @@ function bindTouchAction() {
       console.log(value, progress)
       allTimeline.seek(progress)
       animationPlay(progress)
+    },
+    touchStart(evt, value) {
+      dirty.value = true
     }
   })
 }
