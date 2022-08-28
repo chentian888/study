@@ -40,11 +40,10 @@ function ballMove(ball) {
   ball.render(ctx)
 }
 
-function boundaryRemove() {
+export function move() {
   window.requestAnimationFrame(() => {
-    boundaryRemove()
+    move()
   })
   ctx.clearRect(0, 0, W, H)
   ballList.forEach(ballMove)
 }
-export default boundaryRemove

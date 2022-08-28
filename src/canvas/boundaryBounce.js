@@ -11,13 +11,13 @@ export function init() {
   W = canvas.width = 800
   H = canvas.height = 600
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < 20; i++) {
     // const r = Math.random() > 0.9 ? C.random([20, 50]) : C.random([10, 30])
     ballList.push(
       new Ball2({
         x: C.random([0, W]),
         y: C.random([0, H]),
-        r: C.random([20, 50]),
+        r: C.random([30, 70]),
         fillStyle: C.color(),
         vx: C.random([5, -5]),
         vy: C.random([10, -10])
@@ -48,11 +48,10 @@ function ballMove(ball) {
   ball.render(ctx)
 }
 
-function boundaryBounce() {
+export function move() {
   window.requestAnimationFrame(() => {
-    boundaryBounce()
+    move()
   })
   ctx.clearRect(0, 0, W, H)
   ballList.forEach(ballMove)
 }
-export default boundaryBounce

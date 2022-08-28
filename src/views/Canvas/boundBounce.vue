@@ -4,16 +4,11 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
-import C from './utils'
-import Ball from './utils/ball'
+import { init, move } from '../../canvas/boundaryBounce'
 onMounted(async () => {
   await nextTick()
-  const canvas = document.getElementById('stage')
-  const ctx = canvas.getContext('2d')
-  const W = (canvas.width = 800)
-  const H = (canvas.height = 600)
-
-  const ball = new Ball({ x: W / 2, y: H / 2, fillStyle: C.color() }).render(ctx)
+  init()
+  move()
 })
 </script>
 

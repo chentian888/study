@@ -81,11 +81,10 @@ function ballMove() {
   arrow.render(ctx)
 }
 
-function boundaryRound() {
+export function move() {
   window.requestAnimationFrame(() => {
-    boundaryRound()
+    move()
   })
   ctx.clearRect(0, 0, W, H)
   ballMove()
 }
-export default boundaryRound

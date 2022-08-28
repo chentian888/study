@@ -20,8 +20,9 @@
       <h1>二.边界和摩擦</h1>
       <router-link to="/canvas/bound/remove">边界移除</router-link><br />
       <router-link to="/canvas/bound/reset">边界重置</router-link><br />
-      <router-link to="/canvas/bound/switch">边界切换</router-link><br />
+      <router-link to="/canvas/bound/round">边界环绕</router-link><br />
       <router-link to="/canvas/bound/bounce">边界回弹</router-link><br />
+      <router-link to="/canvas/bound/Frictional">摩擦力</router-link><br />
     </div>
     <div class="content">
       <router-view></router-view>

@@ -20,8 +20,9 @@ import FlowMouse from '../views/Canvas/flowMouse.vue'
 import Bound from '../views/Canvas/bound.vue'
 import BoundRemove from '../views/Canvas/boundRemove.vue'
 import BoundReset from '../views/Canvas/boundReset.vue'
-import BoundSwitch from '../views/Canvas/boundSwitch.vue'
+import boundaryRound from '../views/Canvas/boundaryRound.vue'
 import BoundBounce from '../views/Canvas/boundBounce.vue'
+import Frictional from '../views/Canvas/frictional.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -50,8 +51,10 @@ const routes = [
         children: [
           { path: 'remove', component: BoundRemove },
           { path: 'reset', component: BoundReset },
-          { path: 'switch', component: BoundSwitch },
-          { path: 'bounce', component: BoundBounce }
+          { path: 'round', component: boundaryRound },
+          { path: 'bounce', component: BoundBounce },
+          { path: 'frictional', component: Frictional },
+          
         ]
       }
     ]

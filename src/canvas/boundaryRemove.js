@@ -37,7 +37,7 @@ function ballMove(ball, index) {
   ball.render(ctx)
 }
 
-function boundaryRemove() {
+export function boundaryRemove() {
   window.requestAnimationFrame(() => {
     boundaryRemove()
   })
@@ -47,4 +47,3 @@ function boundaryRemove() {
     ballMove(ballList[len], len)
   }
 }
-export default boundaryRemove
