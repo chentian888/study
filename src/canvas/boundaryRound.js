@@ -10,7 +10,10 @@ let arrow = null
 let vx = 0,
   vy = 0,
   vr = 0,
-  a = 0
+  a = 0,
+  f = 0.95
+
+// f摩擦系数
 
 window.addEventListener('keydown', (e) => {
   const keyCode = e.keyCode
@@ -27,18 +30,18 @@ window.addEventListener('keydown', (e) => {
 
     // left
     case 37:
-      a = -0.1
+      a = -0.5
       break
 
     // right
     case 39:
-      a = 0.1
+      a = 0.5
       break
   }
 })
 window.addEventListener('keyup', (e) => {
-  vx = 0
-  vy = 0
+  // vx = 0
+  // vy = 0
   vr = 0
   a = 0
 })
@@ -63,6 +66,10 @@ function ballMove() {
   const ay = a * Math.sin(angle)
   vx += ax
   vy += ay
+
+  // 摩擦系数
+  vx *= f
+  vy *= f
 
   arrow.x += vx
   arrow.y += vy
