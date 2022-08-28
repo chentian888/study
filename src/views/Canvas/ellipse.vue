@@ -5,7 +5,7 @@
 <script setup>
 import { nextTick, onMounted } from 'vue'
 import C from '../../canvas/utils'
-import Ball from '../../canvas/ball'
+import Ball from '../../canvas/ball2'
 onMounted(async () => {
   await nextTick()
   const canvas = document.getElementById('stage')
