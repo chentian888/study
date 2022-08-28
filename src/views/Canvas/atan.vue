@@ -4,7 +4,7 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
-import Atan from './utils/atan'
+import Atan from '../../canvas/atan'
 onMounted(async () => {
   await nextTick()
   const canvas = document.getElementById('stage')

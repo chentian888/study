@@ -4,8 +4,8 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
-import C from './utils'
-import Ball from './utils/ball'
+import C from '../../canvas/utils'
+import Arrow from '../../canvas/arrow2'
 onMounted(async () => {
   await nextTick()
   const canvas = document.getElementById('stage')
@@ -13,7 +13,7 @@ onMounted(async () => {
   const W = (canvas.width = 800)
   const H = (canvas.height = 600)
 
-  const ball = new Ball({ x: W / 2, y: H / 2, fillStyle: C.color() }).render(ctx)
+  const arrow = new Arrow({ x: W / 2, y: H / 2, fillStyle: C.color() }).drawArrow(ctx).render(ctx)
 })
 </script>
 

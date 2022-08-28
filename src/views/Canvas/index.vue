@@ -14,8 +14,8 @@
       <router-link to="/canvas/velocity">加速度</router-link><br />
       <router-link to="/canvas/gravity">重力加速度</router-link><br />
       <router-link to="/canvas/arrow">绘制箭头</router-link><br />
-      <router-link to="/canvas/rotate">箭头跟转动</router-link><br />
-      <router-link to="/canvas/flowMouse">箭头跟随鼠标转动</router-link><br />
+      <router-link to="/canvas/rotate">箭头跟随鼠标方向转动</router-link><br />
+      <router-link to="/canvas/flowMouse">箭头跟随鼠标</router-link><br />
       <hr />
       <h1>二.边界和摩擦</h1>
       <router-link to="/canvas/bound/remove">边界移除</router-link><br />
