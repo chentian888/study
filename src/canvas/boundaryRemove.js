@@ -42,8 +42,9 @@ export function boundaryRemove() {
     boundaryRemove()
   })
   ctx.clearRect(0, 0, W, H)
-  let len = ballList.length
-  while (len--) {
-    ballMove(ballList[len], len)
-  }
+  // let len = ballList.length
+  // while (len--) {
+  //   ballMove(ballList[len], len)
+  // }
+  ballList.forEach(ballMove)
 }
