@@ -23,6 +23,10 @@
       <router-link to="/canvas/bound/round">边界环绕</router-link><br />
       <router-link to="/canvas/bound/bounce">边界回弹</router-link><br />
       <router-link to="/canvas/bound/Frictional">摩擦力</router-link><br />
+      <h1>三.鼠标和绘制对象的交互</h1>
+      <router-link to="/canvas/mouse/drag">拖拽绘制对象</router-link><br />
+      <router-link to="/canvas/mouse/draganimate">带运动的拖拽动画</router-link><br />
+      <router-link to="/canvas/mouse/throwing">投掷动画</router-link><br />
     </div>
     <div class="content">
       <router-view></router-view>

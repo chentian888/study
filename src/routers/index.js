@@ -17,12 +17,17 @@ import Arrow from '../views/Canvas/arrow.vue'
 import Rotate from '../views/Canvas/rotate.vue'
 import FlowMouse from '../views/Canvas/flowMouse.vue'
 
-import Bound from '../views/Canvas/bound.vue'
-import BoundRemove from '../views/Canvas/boundRemove.vue'
-import BoundReset from '../views/Canvas/boundReset.vue'
-import boundaryRound from '../views/Canvas/boundaryRound.vue'
-import BoundBounce from '../views/Canvas/boundBounce.vue'
-import Frictional from '../views/Canvas/frictional.vue'
+import Bound from '../views/Canvas/bound/index.vue'
+import BoundRemove from '../views/Canvas/bound/boundRemove.vue'
+import BoundReset from '../views/Canvas/bound/boundReset.vue'
+import boundaryRound from '../views/Canvas/bound/boundaryRound.vue'
+import BoundBounce from '../views/Canvas/bound/boundBounce.vue'
+import Frictional from '../views/Canvas/bound/frictional.vue'
+
+import Mouse from '../views/Canvas/mouse/index.vue'
+import MouseDrag from '../views/Canvas/mouse/drag.vue'
+import MouseDragAnimate from '../views/Canvas/mouse/draganimate.vue'
+import MouseThrowing from '../views/Canvas/mouse/throwing.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -53,8 +58,16 @@ const routes = [
           { path: 'reset', component: BoundReset },
           { path: 'round', component: boundaryRound },
           { path: 'bounce', component: BoundBounce },
-          { path: 'frictional', component: Frictional },
-          
+          { path: 'frictional', component: Frictional }
+        ]
+      },
+      {
+        path: 'mouse',
+        component: Mouse,
+        children: [
+          { path: 'drag', component: MouseDrag },
+          { path: 'draganimate', component: MouseDragAnimate },
+          { path: 'throwing', component: MouseThrowing }
         ]
       }
     ]

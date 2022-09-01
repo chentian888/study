@@ -4,7 +4,7 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
-import { init, move } from '../../canvas/boundaryRound'
+import { init, move } from '../../../canvas/boundReset'
 onMounted(async () => {
   await nextTick()
   init()

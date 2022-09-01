@@ -4,11 +4,11 @@
 
 <script setup>
 import { nextTick, onMounted } from 'vue'
-import { init, move } from '../../canvas/boundaryBounce'
+import { init, boundaryRemove } from '../../../canvas/boundaryRemove'
 onMounted(async () => {
   await nextTick()
   init()
-  move()
+  boundaryRemove()
 })
 </script>
 
