@@ -14,6 +14,10 @@ export default class Ball2 {
     Object.assign(this, props)
   }
 
+  isPoint({ x, y }) {
+    return this.r >= Math.sqrt(Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2))
+  }
+
   render(ctx) {
     const { x, y, r, fillStyle, strokeStyle } = this
     ctx.save()
