@@ -29,6 +29,14 @@ import MouseDrag from '../views/Canvas/mouse/drag.vue'
 import MouseDragAnimate from '../views/Canvas/mouse/draganimate.vue'
 import MouseThrowing from '../views/Canvas/mouse/throwing.vue'
 
+import Tween from '../views/Canvas/tween/index.vue'
+import TweenBase from '../views/Canvas/tween/base.vue'
+import TweenCase1 from '../views/Canvas/tween/case1.vue'
+import TweenCase2 from '../views/Canvas/tween/case2.vue'
+import TweenBounce from '../views/Canvas/tween/bounce.vue'
+import TweenRubberBand from '../views/Canvas/tween/rubberBand.vue'
+import TweenManyBounce from '../views/Canvas/tween/manyBounce.vue'
+
 const routes = [
   { path: '/', component: Home },
   { path: '/game', component: Game },
@@ -68,6 +76,18 @@ const routes = [
           { path: 'drag', component: MouseDrag },
           { path: 'draganimate', component: MouseDragAnimate },
           { path: 'throwing', component: MouseThrowing }
+        ]
+      },
+      {
+        path: 'tween',
+        component: Tween,
+        children: [
+          { path: 'base', component: TweenBase },
+          { path: 'case1', component: TweenCase1 },
+          { path: 'case2', component: TweenCase2 },
+          { path: 'bounce', component: TweenBounce },
+          { path: 'rubberBand', component: TweenRubberBand },
+          { path: 'manyBounce', component: TweenManyBounce }
         ]
       }
     ]

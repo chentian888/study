@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="menu">
       <hr />
-      <h1>一.运动和三角函数</h1>
+      <h1 class="font-bold text-lg">一.运动和三角函数</h1>
       <router-link to="/canvas/atan">atan和antan2的区别</router-link><br />
       <router-link to="/canvas/ball">绘制圆球</router-link><br />
       <router-link to="/canvas/smooth">平滑运动</router-link><br />
@@ -17,16 +17,25 @@
       <router-link to="/canvas/rotate">箭头跟随鼠标方向转动</router-link><br />
       <router-link to="/canvas/flowMouse">箭头跟随鼠标</router-link><br />
       <hr />
-      <h1>二.边界和摩擦</h1>
+      <h1 class="font-bold text-lg">二.边界和摩擦</h1>
       <router-link to="/canvas/bound/remove">边界移除</router-link><br />
       <router-link to="/canvas/bound/reset">边界重置</router-link><br />
       <router-link to="/canvas/bound/round">边界环绕</router-link><br />
       <router-link to="/canvas/bound/bounce">边界回弹</router-link><br />
       <router-link to="/canvas/bound/Frictional">摩擦力</router-link><br />
-      <h1>三.鼠标和绘制对象的交互</h1>
+      <hr />
+      <h1 class="font-bold text-lg">三.鼠标和绘制对象的交互</h1>
       <router-link to="/canvas/mouse/drag">拖拽绘制对象</router-link><br />
       <router-link to="/canvas/mouse/draganimate">带运动的拖拽动画</router-link><br />
       <router-link to="/canvas/mouse/throwing">投掷动画</router-link><br />
+      <hr />
+      <h1 class="font-bold text-lg">四.第4章-缓动与弹动</h1>
+      <router-link to="/canvas/tween/base">缓动的基本原理</router-link><br />
+      <router-link to="/canvas/tween/case1">缓动案例1</router-link><br />
+      <router-link to="/canvas/tween/case2">缓动案例2</router-link><br />
+      <router-link to="/canvas/tween/bounce">弹动的基本原理</router-link><br />
+      <router-link to="/canvas/tween/rubberBand">弹动案例-橡皮筋</router-link><br />
+      <router-link to="/canvas/tween/manyBounce">多物体弹动</router-link><br />
     </div>
     <div class="content">
       <router-view></router-view>
