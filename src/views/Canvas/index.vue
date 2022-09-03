@@ -35,6 +35,7 @@
       <router-link to="/canvas/tween/case2">缓动案例2</router-link><br />
       <router-link to="/canvas/tween/bounce">弹动的基本原理</router-link><br />
       <router-link to="/canvas/tween/rubberBand">弹动案例-橡皮筋</router-link><br />
+      <router-link to="/canvas/tween/twoBounce">2个物体弹动</router-link><br />
       <router-link to="/canvas/tween/manyBounce">多物体弹动</router-link><br />
     </div>
     <div class="content">

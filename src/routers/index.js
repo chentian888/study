@@ -35,6 +35,7 @@ import TweenCase1 from '../views/Canvas/tween/case1.vue'
 import TweenCase2 from '../views/Canvas/tween/case2.vue'
 import TweenBounce from '../views/Canvas/tween/bounce.vue'
 import TweenRubberBand from '../views/Canvas/tween/rubberBand.vue'
+import TwoBounce from '../views/Canvas/tween/twoBounce.vue'
 import TweenManyBounce from '../views/Canvas/tween/manyBounce.vue'
 
 const routes = [
@@ -87,6 +88,7 @@ const routes = [
           { path: 'case2', component: TweenCase2 },
           { path: 'bounce', component: TweenBounce },
           { path: 'rubberBand', component: TweenRubberBand },
+          { path: 'twoBounce', component: TwoBounce },
           { path: 'manyBounce', component: TweenManyBounce }
         ]
       }

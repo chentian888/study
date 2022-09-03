@@ -15,6 +15,7 @@ export default class Ball2 {
   }
 
   isPoint({ x, y }) {
+    console.log(this.x - x, this.y - y)
     return this.r >= Math.sqrt(Math.pow(this.x - x, 2) + Math.pow(this.y - y, 2))
   }
 

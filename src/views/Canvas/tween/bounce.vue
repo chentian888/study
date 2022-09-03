@@ -16,7 +16,11 @@ onMounted(async () => {
   canvas.width = W = 1200
   canvas.height = H = 800
 
+  //   缓动系数-非时间系数
   let easing = 0.02
+
+  //   摩擦力系数
+  let friction = 0.95
 
   const targetX = W / 2
 
@@ -32,9 +36,15 @@ onMounted(async () => {
       move()
     })
     ctx.clearRect(0, 0, W, H)
-    
+
     let dx = (targetX - ball.x) * easing
+    // 永动
+    // ball.vx += dx
+    // ball.x += ball.vx
+
+    // 会停止
     ball.vx += dx
+    ball.vx *= friction
     ball.x += ball.vx
 
     ball.render(ctx)
