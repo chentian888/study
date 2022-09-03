@@ -15,14 +15,20 @@ onMounted(() => {
   canvas.height = H = 600
   //   鼠标在canvas中的坐标
   const mouse = C.getOffset(canvas)
+
+  // 存放鼠标在圆球内部时鼠标x/y的坐标与圆球中心点的x/y的坐标的距离
   let diffX = 0,
     diffY = 0
 
+  // 存放速度向量
   let vx = C.random([-10, 10]),
     vy = -10,
+    // 重力加速度
     g = 0.2,
+    // 到达边界后衰减系数
     bounce = -0.8
 
+  // 鼠标是否在移动
   let isMouseMove = false
 
   const ball = new Ball({
@@ -63,9 +69,12 @@ onMounted(() => {
 
   //   小球自动运动
   function BallAnimation() {
+    // 从下面的位置移动上面可以防止小球一直上下不停跳动问题
+    vy += g
     ball.x += vx
     ball.y += vy
-    vy += g
+    // vy += g
+
     // x轴越界判断
     if (ball.x + ball.r >= W) {
       ball.x = W - ball.r
