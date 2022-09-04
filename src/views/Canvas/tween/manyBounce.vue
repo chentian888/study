@@ -6,8 +6,6 @@
 import { nextTick, onMounted } from 'vue'
 onMounted(async () => {
   await nextTick()
-  //   1.绘制2个小球
-  // 2.绘制2个小球之间的连线
 })
 </script>
 
