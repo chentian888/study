@@ -22,7 +22,7 @@ onMounted(async () => {
   const spring = 0.03
 
   // 魔法系数
-  const friction = 0.95
+  const friction = 0.9
 
   // 偏移系数
   const springLen = 200
