@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Game from '../views/Game.vue'
+import Home from '@/views/home.vue'
+import Game from '@/views/game.vue'
 import YjDaod from '../views/YjDaod/index.vue'
 import Canvas from '../views/Canvas/index.vue'
 import Ball from '../views/Canvas/ball.vue'
@@ -37,11 +37,13 @@ import TweenBounce from '../views/Canvas/tween/bounce.vue'
 import TweenRubberBand from '../views/Canvas/tween/rubberBand.vue'
 import TwoBounce from '../views/Canvas/tween/twoBounce.vue'
 import TweenManyBounce from '../views/Canvas/tween/manyBounce.vue'
+import LiZi from '@/views/Canvas/lizi.vue'
 
 const routes = [
   { path: '/', component: Home },
   { path: '/game', component: Game },
   { path: '/yjdaod', component: YjDaod },
+  { path: '/lizi', component: LiZi },
   {
     path: '/canvas',
     component: Canvas,
